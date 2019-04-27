@@ -8,7 +8,15 @@
 
 ### `rsfCollectResponses(maxResponses, prompt, maxTime, contactables, callback)`
 
-The core logic for interacting with participants, timeouts, and collecting responses
+The core logic for interacting with participants, timeouts, and collecting responses.
+
+How it works:
+- rules for the process will be sent to participants
+- the prompt will be sent to partipants
+- it will listen for any responses from each participant, and add it to the list of results if they are under the allowed `maxResponses` number
+- it will stop accepting responses from a partipant when they reach the `maxResponses` number, and let them know
+- it will let everyone know when the process has completed because of the `maxTime` came to pass, or
+- it will let everyone know when the process has completed because all of the participants submitted as many responses as the `maxResponses` number
 
 `maxResponses` : `Number`, the number of responses to stop collecting at
 
@@ -31,4 +39,10 @@ The core logic for interacting with participants, timeouts, and collecting respo
 
 `readWriteDir` : `String`, the path to the directory from which to read an `input.json` file and write the `output.json` file
 
-`
+
+## Development
+
+Tests are written in mocha/chai/sinon and can be run using
+```
+npm test
+```

@@ -1,6 +1,6 @@
 {
   "name": "rsf-collect-responses",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "programmatically collect responses from a list of participants",
   "main": "index.js",
   "scripts": {
@@ -11,9 +11,9 @@
     "url" : "https://github.com/rapid-sensemaking-framework/rsf-collect-responses.git"
   },
   "author": "",
-  "license": "AGPL-3.0-or-later",
+  "license": "GPL-3.0",
   "dependencies": {
-    "rsf-contactable": "0.0.4",
+    "rsf-contactable": "0.0.5",
     "rsf-reader-writer": "0.0.1"
   },
   "devDependencies": {
