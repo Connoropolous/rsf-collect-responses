@@ -1,6 +1,6 @@
 {
   "name": "rsf-collect-responses",
-  "version": "0.0.19",
+  "version": "0.0.23",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,8 @@
   "author": "",
   "license": "AGPL-3.0-or-later",
   "dependencies": {
-    "rsf-reader-writer": "^0.0.1",
-    "rsf-contactable": "^0.0.1"
+    "rsf-contactable": "0.0.4",
+    "rsf-reader-writer": "0.0.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

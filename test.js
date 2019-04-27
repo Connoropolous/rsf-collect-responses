@@ -1,33 +1,12 @@
 const { expect } = require('chai')
 const sinon = require('sinon')
 const { rsfCollectResponses } = require('./index')
-
-const newMockMakeContactable = () => {
-    const contactables = []
-    return {
-        fn: person_config => {
-            let listenCb = () => {}
-            const newC = {
-                id: person_config.id,
-                speak: sinon.spy(),
-                listen: (cb) => {
-                    // override listenCb
-                    listenCb = cb
-                },
-                // force call to listenCb
-                trigger: text => listenCb(text)
-            }
-            contactables.push(newC)
-            return newC
-        },
-        contactables
-    }
-}
+const { newMockMakeContactable } = require('rsf-contactable')
 
 describe('#rsfCollectResponses', () => {
     context('when timeout is reached, regardless if no responses have been added', function () {
         it('should early exit and return 0 results', done => {
-            rsfCollectResponses(2, '', [], 1000, newMockMakeContactable().fn, results => {
+            rsfCollectResponses(2, '', 1000, [], results => {
                 expect(results.length).to.equal(0)
                 done()
             })
@@ -36,10 +15,11 @@ describe('#rsfCollectResponses', () => {
 
     context('when the number of participants is 1 and the process completes through user action, not the timeout', function () {
         it('the number of responses should equal the number of participants times the max number of responses per participant', done => {
-            const { fn, contactables } = newMockMakeContactable()
-            rsfCollectResponses(2, '', [{id: 'dude'}], 4000, fn, results => {
+            const mockMakeContactable = newMockMakeContactable(sinon.spy)
+            const contactables = [{ id: 'dude' }].map(mockMakeContactable)
+            rsfCollectResponses(2, '', 4000, contactables, results => {
                 expect(results.length).to.equal(2)
-                expect(results).to.eql([{text: 'hi', id: 'dude'}, {text: 'hi again', id: 'dude'}])
+                expect(results).to.eql([{ text: 'hi', id: 'dude' }, { text: 'hi again', id: 'dude' }])
                 done()
             })
             contactables[0].trigger('hi')
@@ -49,14 +29,15 @@ describe('#rsfCollectResponses', () => {
 
     context('when the number of participants is 2 and the process completes through user action, not the timeout', function () {
         it('the number of responses should still equal the number of participants times the max number of responses per participant', done => {
-            const { fn, contactables } = newMockMakeContactable()
-            rsfCollectResponses(2, '', [{id: 'p1'}, {id: 'p2'}], 4000, fn, results => {
+            const mockMakeContactable = newMockMakeContactable(sinon.spy)
+            const contactables = [{ id: 'p1' }, { id: 'p2' }].map(mockMakeContactable)
+            rsfCollectResponses(2, '', 4000, contactables, results => {
                 expect(results.length).to.equal(4)
                 expect(results).to.eql([
-                    {text: 'hi', id: 'p1'},
-                    {text: 'hi again', id: 'p1'},
-                    {text: 'idea', id: 'p2'},
-                    {text: 'idea again', id: 'p2'},
+                    { text: 'hi', id: 'p1' },
+                    { text: 'hi again', id: 'p1' },
+                    { text: 'idea', id: 'p2' },
+                    { text: 'idea again', id: 'p2' },
                 ])
                 done()
             })
@@ -69,8 +50,9 @@ describe('#rsfCollectResponses', () => {
 
     context('context and rules should be conveyed', function () {
         it('should convey useful feedback to the participants', done => {
-            const { fn, contactables } = newMockMakeContactable()
-            rsfCollectResponses(1, 'prompt', [{id: 'dude'}], 4000, fn, () => done())
+            const mockMakeContactable = newMockMakeContactable(sinon.spy)
+            const contactables = [{ id: 'dude' }].map(mockMakeContactable)
+            rsfCollectResponses(1, 'prompt', 4000, contactables, () => done())
             const spoken = contactables[0].speak
             expect(spoken.getCall(0).args[0]).to.equal('prompt')
             expect(spoken.getCall(1).args[0]).to.equal('The process will stop automatically after 4000 milliseconds.')
