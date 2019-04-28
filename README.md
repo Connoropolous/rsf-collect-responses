@@ -1,5 +1,12 @@
 # rsf-collect-responses
 
+`rsf-collect-responses` is part of the Rapid Sensemaking Framework ecosystem... please read
+the [README of rsf-runner](https://github.com/rapid-sensemaking-framework/rsf-runner/blob/master/README.md) for the full context for what that is.
+
+`rsf-collect-responses` is an [RSF Operator](https://github.com/rapid-sensemaking-framework/rsf-runner#rsf-operators)
+
+For a prompt, collect statements numbering up to a given maximum (or unlimited) from a list of participants
+
 ## Installation
 
 `npm install --save rsf-collect-responses`
@@ -41,6 +48,26 @@ The following could be used in an [RSF Sequence](https://github.com/rapid-sensem
 
 ## API
 
+___
+
+### `main(readWriteDir)`
+
+executes as a process until `rsfCollectResponses` completes, at which points it writes the results to a JSON file in the given `readWriteDir` directory, and exits the process.
+
+`readWriteDir` : `String`, the path to the directory from which to read an `input.json` file and write the `output.json` file
+
+Expectations for `input.json`:
+
+`input.max_responses`, for `maxResponses` in `rsfCollectResponses`
+
+`input.prompt` for `prompt` in `rsfCollectResponses`
+
+`input.participants_config` which it will make an `[Contactables]` using `makeContactable` from `rsf-contactable`  to pass in as `contactables` to `rsfCollectResponses`
+
+`input.max_time`, for `maxTime` in `rsfCollectResponses`
+
+___
+
 ### `rsfCollectResponses(maxResponses, prompt, maxTime, contactables, callback)`
 
 The core logic for interacting with participants, timeouts, and collecting responses.
@@ -72,21 +99,7 @@ How it works:
 
 `Response.timestamp` : `Number`, the unix timestamp of the moment the message was received
 
-### `main(readWriteDir)`
 
-executes as a process until `rsfCollectResponses` completes, at which points it writes the results to a JSON file in the given `readWriteDir` directory, and exits the process.
-
-`readWriteDir` : `String`, the path to the directory from which to read an `input.json` file and write the `output.json` file
-
-Expectations for `input.json`:
-
-`input.max_responses`, for `maxResponses` in `rsfCollectResponses`
-
-`input.prompt` for `prompt` in `rsfCollectResponses`
-
-`input.participants_config` which it will make an `[Contactables]` using `makeContactable` from `rsf-contactable`  to pass in as `contactables` to `rsfCollectResponses`
-
-`input.max_time`, for `maxTime` in `rsfCollectResponses`
 
 ## Development
 
