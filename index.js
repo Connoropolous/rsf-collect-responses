@@ -14,7 +14,7 @@ const UNLIMITED_CHAR = '*'
 // maxResponses : Number | String, the number of responses to stop collecting at, use '*' for any amount
 // prompt : String, the text that prompts people, and sets the rules and context
 // maxTime : Number, the number of milliseconds to wait until stopping this process automatically
-// contactables: [Contactable], ...
+// contactables: [Contactable], the "contactables" array from `rsf-contactable`, or a mock... objects with `.speak` and `.listen` methods.
 // callback : Function, a callback to call with only one argument which are the results
 
 // gives
