@@ -1,8 +1,43 @@
 # rsf-collect-responses
 
-
 ## Installation
+
 `npm install --save rsf-collect-responses`
+
+## RSF Sequence example
+
+The following could be used in an [RSF Sequence](https://github.com/rapid-sensemaking-framework/rsf-runner#rsf-sequences) JSON file.
+
+```json
+{
+    "id": "rsf-collect-responses",
+    "description": "Gather input from people based on a prompt",
+    "language": "node",
+    "contract": {
+        "needs": {
+            "max_time": "number",
+            "prompt": "string",
+            "max_responses": "number",
+            "participants_config": [{
+                "id": "string",
+                "name": "string",
+                "type": "string"
+            }]
+        },
+        "gives": [{
+            "text": "string",
+            "id": "string",
+            "timestamp": "number"
+        }]
+    },
+    "dependencies_file": {
+        "dependencies": {
+            "rsf-collect-responses": "^0.0.25"
+        }
+    },
+    "code_file": "require('rsf-collect-responses').main(__dirname)"
+}
+```
 
 ## API
 
@@ -11,6 +46,7 @@
 The core logic for interacting with participants, timeouts, and collecting responses.
 
 How it works:
+
 - rules for the process will be sent to participants
 - the prompt will be sent to partipants
 - it will listen for any responses from each participant, and add it to the list of results if they are under the allowed `maxResponses` number
@@ -36,15 +72,14 @@ How it works:
 
 `Response.timestamp` : `Number`, the unix timestamp of the moment the message was received
 
-
 ### `main(readWriteDir)`
 
 `readWriteDir` : `String`, the path to the directory from which to read an `input.json` file and write the `output.json` file
 
-
 ## Development
 
 Tests are written in mocha/chai/sinon and can be run using
+
 ```
 npm test
 ```
