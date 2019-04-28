@@ -74,7 +74,19 @@ How it works:
 
 ### `main(readWriteDir)`
 
+executes as a process until `rsfCollectResponses` completes, at which points it writes the results to a JSON file in the given `readWriteDir` directory, and exits the process.
+
 `readWriteDir` : `String`, the path to the directory from which to read an `input.json` file and write the `output.json` file
+
+Expectations for `input.json`:
+
+`input.max_responses`, for `maxResponses` in `rsfCollectResponses`
+
+`input.prompt` for `statements` in `rsfCollectResponses`
+
+`input.participants_config` which it will make an `[Contactables]` using `makeContactable` from `rsf-contactable`  to pass in as `contactables` to `rsfCollectResponses`
+
+`input.max_time`, for `maxTime` in `rsfCollectResponses`
 
 ## Development
 
