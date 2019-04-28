@@ -82,7 +82,7 @@ Expectations for `input.json`:
 
 `input.max_responses`, for `maxResponses` in `rsfCollectResponses`
 
-`input.prompt` for `statements` in `rsfCollectResponses`
+`input.prompt` for `prompt` in `rsfCollectResponses`
 
 `input.participants_config` which it will make an `[Contactables]` using `makeContactable` from `rsf-contactable`  to pass in as `contactables` to `rsfCollectResponses`
 
