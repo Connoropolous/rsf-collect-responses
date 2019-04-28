@@ -14,11 +14,11 @@ How it works:
 - rules for the process will be sent to participants
 - the prompt will be sent to partipants
 - it will listen for any responses from each participant, and add it to the list of results if they are under the allowed `maxResponses` number
-- it will stop accepting responses from a partipant when they reach the `maxResponses` number, and let them know
-- it will let everyone know when the process has completed because of the `maxTime` came to pass, or
+- it will stop accepting responses from a partipant if/when they reach the `maxResponses` number, and let them know
+- it will let everyone know when the process has completed because the `maxTime` came to pass, or
 - it will let everyone know when the process has completed because all of the participants submitted as many responses as the `maxResponses` number
 
-`maxResponses` : `Number`, the number of responses to stop collecting at
+`maxResponses` : `Number`, the number of responses to stop collecting at, use `*` for any amount
 
 `prompt` : `String`, the text that prompts people, and sets the rules and context
 
@@ -33,6 +33,8 @@ How it works:
 `Response.text` : `String`, the text of the response
 
 `Response.id` : `String`, the id of the agent who gave the response
+
+`Response.timestamp` : `Number`, the unix timestamp of the moment the message was received
 
 
 ### `main(readWriteDir)`

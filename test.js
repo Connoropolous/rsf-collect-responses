@@ -19,7 +19,8 @@ describe('#rsfCollectResponses', () => {
             const contactables = [{ id: 'dude' }].map(mockMakeContactable)
             rsfCollectResponses(2, '', 4000, contactables, results => {
                 expect(results.length).to.equal(2)
-                expect(results).to.eql([{ text: 'hi', id: 'dude' }, { text: 'hi again', id: 'dude' }])
+                expect(results[0].text).to.equal('hi')
+                expect(results[1].text).to.equal('hi again')
                 done()
             })
             contactables[0].trigger('hi')
@@ -33,12 +34,10 @@ describe('#rsfCollectResponses', () => {
             const contactables = [{ id: 'p1' }, { id: 'p2' }].map(mockMakeContactable)
             rsfCollectResponses(2, '', 4000, contactables, results => {
                 expect(results.length).to.equal(4)
-                expect(results).to.eql([
-                    { text: 'hi', id: 'p1' },
-                    { text: 'hi again', id: 'p1' },
-                    { text: 'idea', id: 'p2' },
-                    { text: 'idea again', id: 'p2' },
-                ])
+                expect(results[0].text).to.equal('hi')
+                expect(results[1].text).to.equal('hi again')
+                expect(results[2].text).to.equal('idea')
+                expect(results[3].text).to.equal('idea again')
                 done()
             })
             contactables[0].trigger('hi')
