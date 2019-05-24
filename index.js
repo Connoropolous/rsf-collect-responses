@@ -78,7 +78,7 @@ const rsfCollectResponses = (maxResponses, prompt, maxTime, contactables, callba
             // in the case where maxResponses is Infinity,
             // this will never match
             if (results.length === contactables.length * maxResponses) {
-                complete(ALL_COMPLETED_TEXT)
+                setTimeout(() => complete(ALL_COMPLETED_TEXT), 500)
             }
         })
     })
