@@ -39,7 +39,7 @@ The following could be used in an [RSF Sequence](https://github.com/rapid-sensem
     },
     "dependencies_file": {
         "dependencies": {
-            "rsf-collect-responses": "0.0.28"
+            "rsf-collect-responses": "0.0.29"
         }
     },
     "code_file": "require('rsf-collect-responses').main(__dirname)"

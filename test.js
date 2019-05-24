@@ -51,13 +51,15 @@ describe('#rsfCollectResponses', () => {
         it('should convey useful feedback to the participants', done => {
             const mockMakeContactable = newMockMakeContactable(sinon.spy)
             const contactables = [{ id: 'dude' }].map(mockMakeContactable)
-            rsfCollectResponses(1, 'prompt', 4000, contactables, () => done())
-            const spoken = contactables[0].speak
-            expect(spoken.getCall(0).args[0]).to.equal('prompt')
-            expect(spoken.getCall(1).args[0]).to.equal('The process will stop automatically after 4000 milliseconds.')
+            rsfCollectResponses(3, 'prompt', 1000, contactables, () => {
+                const spoken = contactables[0].speak
+                expect(spoken.getCall(0).args[0]).to.equal('prompt')
+                expect(spoken.getCall(1).args[0]).to.equal('The process will stop automatically after 1000 milliseconds.')
+                expect(spoken.getCall(2).args[0]).to.equal('The max time has been reached. Stopping now. Thanks for participating.')
+                done()
+            })
             contactables[0].trigger('hi')
-            expect(spoken.getCall(2).args[0]).to.equal('You\'ve reached the limit of responses. Thanks for participating. You will be notified when everyone has completed.')
-            expect(spoken.getCall(3).args[0]).to.equal('Everyone has completed. Thanks for participating.')
+
         })
     })
 })

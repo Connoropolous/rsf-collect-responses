@@ -56,7 +56,7 @@ const rsfCollectResponses = (maxResponses, prompt, maxTime, contactables, callba
         // initiate contact with the person
         // and set context, and "rules"
         contactable.speak(prompt)
-        contactable.speak(rulesText(maxTime))
+        setTimeout(() => contactable.speak(rulesText(maxTime)), 500)
 
         // listen for messages from them, and treat each one
         // as an input, up till the alotted amount
