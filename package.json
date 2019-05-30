@@ -1,6 +1,6 @@
 {
   "name": "rsf-collect-responses",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "programmatically collect responses from a list of participants",
   "main": "index.js",
   "scripts": {
