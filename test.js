@@ -54,7 +54,7 @@ describe('#rsfCollectResponses', () => {
             rsfCollectResponses(3, 'prompt', 1000, contactables, () => {
                 const spoken = contactables[0].speak
                 expect(spoken.getCall(0).args[0]).to.equal('prompt')
-                expect(spoken.getCall(1).args[0]).to.equal('You can contribute up to 3 responses. The process will stop automatically after 1 seconds.')
+                expect(spoken.getCall(1).args[0]).to.equal('Contribute one response per message. You can contribute up to 3 responses. The process will stop automatically after 1 seconds.')
                 expect(spoken.getCall(2).args[0]).to.equal('The max time has been reached. Stopping now. Thanks for participating.')
                 done()
             })
