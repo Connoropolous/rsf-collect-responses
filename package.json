@@ -1,6 +1,6 @@
 {
   "name": "rsf-collect-responses",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "description": "programmatically collect responses from a list of participants",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "rsf-contactable": "0.0.7",
+    "rsf-contactable": "0.0.71",
     "rsf-reader-writer": "0.0.1"
   },
   "devDependencies": {
